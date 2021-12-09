@@ -3,15 +3,17 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 
 class MyEnumerable
   def all?(arg = nil)
     unless arg.nil?
-      if arg.is_a? Class
+      case arg
+      when Class
         each do |item|
           return false unless item.is_a?(arg)
         end
-      elsif arg.is_a? Regexp
+      when Regexp
         each { |item| return false unless item =~ arg }
       else
         each { |item| return false unless item == arg }
@@ -32,11 +34,12 @@ class MyEnumerable
 
   def my_any?(arg = nil)
     unless arg.nil?
-      if arg.is_a? Class
+      case arg
+      when Class
         each do |item|
           return true if item.is_a?(arg)
         end
-      elsif arg.is_a? Regexp
+      when Regexp
         each { |item| return true if item =~ arg }
       else
         each { |item| return true if item == arg }
@@ -83,3 +86,4 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
