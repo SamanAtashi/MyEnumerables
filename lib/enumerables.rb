@@ -30,6 +30,31 @@ class MyEnumerable
     result
   end
 
+  def my_any?(arg = nil)
+    unless arg.nil?
+      if arg.is_a? Class
+        each do |item|
+          return true if item.is_a?(arg)
+        end
+      elsif arg.is_a? Regexp
+        each { |item| return true if item =~ arg }
+      else
+        each { |item| return true if item == arg }
+      end
+      return false
+    end
+    unless block_given?
+      each { |item| return true if item }
+      return false
+    end
+    result = false
+    each do |item|
+      result = yield(item)
+      break if result == true
+    end
+    result
+  end
+
   def filter
     return enum_for(:filter) unless block_given?
 
