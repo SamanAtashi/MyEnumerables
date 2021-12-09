@@ -1,8 +1,37 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/MethodLength
+
 class MyEnumerable
+  def all?(arg = nil)
+    unless arg.nil?
+      if arg.is_a? Class
+        each do |item|
+          return false unless item.is_a?(arg)
+        end
+      elsif arg.is_a? Regexp
+        each { |item| return false unless item =~ arg }
+      else
+        each { |item| return false unless item == arg }
+      end
+      return true
+    end
+    unless block_given?
+      each { |item| return false unless item }
+      return true
+    end
+    result = false
+    each do |item|
+      result = yield(item)
+      break if result == false
+    end
+    result
+  end
+
   def filter
-    return enum_for(:my_filter) unless block_given?
+    return enum_for(:filter) unless block_given?
 
     new_self = *self
 
@@ -25,3 +54,7 @@ class MyEnumerable
     end
   end
 end
+
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/MethodLength
