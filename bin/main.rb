@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/enumerables.rb'
+require_relative '../lib/enumerables'
 
 class MyList < MyEnumerable
   def initialize(*myarr)
@@ -17,7 +17,7 @@ class MyList < MyEnumerable
 end
 
 list = MyList.new(1, 2, 3, 4)
-puts (list.all? {|e| e > 5})
+puts(list.all? { |e| e > 5 })
 # => #<MyList: @list=[1, 2, 3, 4]>
 # # Test #all?
 # irb> list.all? {|e| e < 5}
