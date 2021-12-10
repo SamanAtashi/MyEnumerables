@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/Documentation
 class MyEnumerable
   def all?
     each { |num| return false unless yield num }
@@ -12,8 +13,9 @@ class MyEnumerable
   end
 
   def filter
-    newArr = []
-    each { |num| newArr.push(num) if yield num }
-    newArr
+    new_arr = []
+    each { |num| new_arr.push(num) if yield num }
+    new_arr
   end
 end
+# rubocop:enable Style/Documentation
