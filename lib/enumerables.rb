@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# rubocop:disable Style/Documentation
 class MyEnumerable
   def all?
     each { |num| return false unless yield num }
@@ -18,4 +15,3 @@ class MyEnumerable
     new_arr
   end
 end
-# rubocop:enable Style/Documentation
