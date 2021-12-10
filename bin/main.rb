@@ -1,22 +1,24 @@
 # frozen_string_literal: true
 
-require_relative '../lib/enumerables'
+require_relative '../lib/enumerables.rb'
 
-class MyList
-  def initialize(*arr)
-    @list = arr
-    @enumerables_ins = MyEnumerable.new
+class MyList < MyEnumerable
+  def initialize(*myarr)
+    @list = myarr
   end
 
-  def all?
-    @enumerables_ins.all?(@list)
+  def each
+    i = 0
+    while i < @list.length
+      yield @list[i]
+      i += 1
+    end
   end
 end
 
 list = MyList.new(1, 2, 3, 4)
-p list
+puts (list.all? {|e| e > 5})
 # => #<MyList: @list=[1, 2, 3, 4]>
-p(list.all?(&:positive?))
 # # Test #all?
 # irb> list.all? {|e| e < 5}
 # => true

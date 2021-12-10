@@ -8,8 +8,8 @@ class MyEnumerable
     false
   end
   def filter
-    filtered = []
-    each { |num| filtered.push(num) if yield num }
-    filtered
+    newArr = []
+    each { |num| newArr.push(num) if yield num }
+    newArr
   end
 end
