@@ -1,6 +1,7 @@
 require_relative '../lib/enumerables'
 
-class MyList < MyEnumerable
+class MyList
+  include MyEnumerable
   def initialize(*myarr)
     super()
     @list = myarr
@@ -18,3 +19,4 @@ end
 
 list = MyList.new(1, 2, 3, 4)
 puts(list.all? { |e| e > 5 })
+puts(list.all? { |e| e < 5 })

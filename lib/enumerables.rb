@@ -1,4 +1,4 @@
-class MyEnumerable
+module MyEnumerable
   def all?
     each { |num| return false unless yield num }
     true
