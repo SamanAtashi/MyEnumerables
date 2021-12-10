@@ -2,6 +2,8 @@ name: Linters
 
 on: pull_request
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
 jobs:
   rubocop:
     name: Rubocop
